@@ -31,7 +31,8 @@ def main(args):
                    "1.3.0", 
                    "1.3.1",
                    "1.4.0")),
-        ('chainer', ("6.0.0")),
+        ('chainer', ("6.0.0",
+                    "7.2.0")),
         ('chainer_ctc', None),
         ('warprnnt_pytorch', ("0.1"))
     ]
