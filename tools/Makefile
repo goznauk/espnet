@@ -42,6 +42,7 @@ extra: nkf.done moses.done mwerSegmenter.done pesq
 
 ifneq ($(strip $(KALDI)),)
 kaldi.done:
+	echo $(shell which nvidia-smi)
 	ln -s $(abspath $(KALDI)) kaldi
 	touch kaldi.done
 else
@@ -108,7 +109,7 @@ warp-transducer.done: espnet.done
 	if . venv/bin/activate && python -c 'import torch as t;assert t.__version__[0] == "1"' &> /dev/null; then \
         . venv/bin/activate && python -c "from distutils.version import LooseVersion as V;assert V('$(GCC_VERSION)') >= V('5.0'), 'Requires gcc>=5.0'"; \
 	fi
-	. venv/bin/activate; cd warp-transducer && mkdir build && cd build && cmake -D CUDA_TOOLKIT_ROOT_DIR=$CUDA_HOME .. && $(MAKE); true
+	. venv/bin/activate; cd warp-transducer && mkdir build && cd build && cmake .. && $(MAKE); true
 	. venv/bin/activate; cd warp-transducer/pytorch_binding && python setup.py install
 	touch warp-transducer.done
 
