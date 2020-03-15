@@ -79,7 +79,7 @@ endif
 
 cupy.done: espnet.done
 ifneq ($(strip $(CUPY_VERSION)),)
-	. venv/bin/activate && pip install --no-cache-dir cupy-cuda$(strip $(subst .,,$(CUDA_VERSION)))==$(CUPY_VERSION)
+	. venv/bin/activate && pip install --no-cache-dir cupy
 	touch cupy.done
 endif
 
