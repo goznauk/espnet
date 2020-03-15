@@ -22,6 +22,8 @@ CONDA_URL := https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.
 # PyTorch>=1.0.0 requires gcc>=4.9 when buliding the extensions
 GCC_VERSION := $(shell gcc -dumpversion)
 
+echo $(PWD)
+echo $(shell which nvcc)
 
 ifneq ($(shell which nvcc),) # 'nvcc' found
 CONDA_PYTORCH := pytorch=$(TH_VERSION) cudatoolkit=$(CUDA_VERSION)
@@ -42,7 +44,7 @@ extra: nkf.done moses.done mwerSegmenter.done pesq
 
 ifneq ($(strip $(KALDI)),)
 kaldi.done:
-	echo $(shell which nvidia-smi)
+	echo $(shell which nvcc)
 	ln -s $(abspath $(KALDI)) kaldi
 	touch kaldi.done
 else
