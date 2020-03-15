@@ -56,12 +56,16 @@ def main(args):
     logging.info("# libraries to be checked = %d" % len(library_list))
     is_correct_installed_list = []
     for idx, (name, version) in enumerate(library_list):
+        logging.info(idx)
+        logging.info(name)
+        logging.info(version)
         try:
             importlib.import_module(name)
             logging.info("--> %s is installed." % name)
             is_correct_installed_list.append(True)
-        except ImportError:
+        except ImportError as err:
             logging.warning("--> %s is not installed." % name)
+            logging.warning("ImportError: {0}".format(err))
             is_correct_installed_list.append(False)
     logging.info("library availableness check done.")
     logging.info("%d / %d libraries are correctly installed." % (
